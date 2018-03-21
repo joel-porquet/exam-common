@@ -1,0 +1,15 @@
+---
+# Formatting
+papersize: letter
+fontsize: 12pt
+documentclass: article
+classoption: twoside
+geometry: margin=1in
+subparagraph: yes
+include-before:
+    - \thispagestyle{empty}
+
+# For latex environment filter
+pandoc-latex-environment:
+    answer: [answer]
+---

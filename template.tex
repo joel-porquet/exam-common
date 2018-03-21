@@ -1,0 +1,54 @@
+%
+% Header/footer
+%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Name:}
+\chead{SID:}
+\rhead{}
+\lfoot{$course$ $quarter$ $year$}
+\rfoot{$date$}
+\cfoot{}
+
+%
+% Solution environment
+%
+$if(solution)$
+\makeatletter\newenvironment{answer}[1]{%
+    \begin{lrbox}{\@tempboxa}\begin{minipage}{\linewidth}%
+}{%
+    \end{minipage}\end{lrbox}%
+    \medskip%
+    \framebox{\usebox{\@tempboxa}}%
+    \medskip%
+}\makeatother
+$else$
+\makeatletter\newenvironment{answer}[1]{%
+    \ifnum#1>0
+    \fbox{\begin{minipage}{\linewidth}\hfill\vspace*{#1\baselineskip}\end{minipage}}%
+    \fi
+    \begin{lrbox}{\@tempboxa}\begin{minipage}{\linewidth}%
+}{%
+    \end{minipage}\end{lrbox}%
+}\makeatother
+$endif$
+
+%
+% Multi-column support
+%
+\usepackage{multicol}
+
+% The columns environment is generated automatically by pandoc (for beamer)
+% Overload it here using multicols and a default of 2 columns
+\makeatletter\newenvironment{columns}[1][]{%
+  \begin{multicols}{2}%
+}{%
+  \end{multicols}%
+}\makeatother
+
+% Overload column with \columnbreak
+\makeatletter\newenvironment{column}[1]{%
+}{%
+  \columnbreak
+}\makeatother
+
