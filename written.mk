@@ -10,17 +10,12 @@ ifeq (,$(shell command -v $(PANDOC) 2>/dev/null))
 $(error Could not find executable '$(PANDOC)' in PATH)
 endif
 
-## Find all files under a directory
-find_files = $(shell find $(1) -maxdepth 1 -type f)
-
-## List of markdown files and resulting PDF files
-md := $(filter %.md,$(call find_files,$(src)))
-pdf := $(md:%.md=%.pdf)
-pdf_sol := $(md:%.md=%_sol.pdf)
+pdf := $(src:%.md=%.pdf)
+pdf_sol := $(src:%.md=%_sol.pdf)
 
 ## Extra dependencies for all targets
 tmpl := $(addprefix $(current_dir),template.tex)
-before := $(addprefix $(current_dir),latex.yaml cover.md)
+before := $(addprefix $(current_dir),latex.yaml cover_$(type).md)
 dep += $(tmpl) $(before)
 
 ## Command management and quiet mode
@@ -36,6 +31,13 @@ echo-cmd = $(if $($(quiet)cmd_$(1)),\
 	echo '  $($(quiet)cmd_$(1))';)
 cmd = @$(echo-cmd) $(cmd_$(1))
 
+## Type of document
+ifeq ($(type),exam)
+exam := yes
+else
+exam := no
+endif
+
 ## Our main rule building all our targets
 all: $(pdf) $(pdf_sol)
 
@@ -43,6 +45,7 @@ all: $(pdf) $(pdf_sol)
 quiet_cmd_tpl = TMPL $(@)
       cmd_tpl = pandoc \
 				-M solution=$(2) \
+				-M exam=$(exam) \
 				--template=$(tmpl) \
 				$< -o $@
 

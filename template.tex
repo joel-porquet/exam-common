@@ -3,8 +3,13 @@
 %
 \usepackage{fancyhdr}
 \pagestyle{fancy}
+$if(exam)$
 \lhead{Name:}
 \chead{SID:}
+$else$
+\lhead{}
+\chead{}
+$endif$
 \rhead{}
 \lfoot{$course$ $quarter$ $year$}
 \rfoot{$date$}
