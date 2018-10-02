@@ -33,9 +33,9 @@ cmd = @$(echo-cmd) $(cmd_$(1))
 
 ## Type of document
 ifeq ($(type),exam)
-exam := yes
+exam := True
 else
-exam := no
+exam := False
 endif
 
 ## Our main rule building all our targets
@@ -50,9 +50,9 @@ quiet_cmd_tpl = TMPL $(@)
 				$< -o $@
 
 %.tpl: %.md $(tmpl)
-	$(call cmd,tpl,no)
+	$(call cmd,tpl,False)
 %_sol.tpl: %.md $(tmpl)
-	$(call cmd,tpl,yes)
+	$(call cmd,tpl,True)
 
 ## Markdown to PDF rule
 quiet_cmd_pandoc = PANDOC $(@)
@@ -60,6 +60,7 @@ quiet_cmd_pandoc = PANDOC $(@)
 				   -H $(2).tpl \
 				   --filter $(addprefix $(current_dir),pandoc_latex_environment.py) \
 				   --filter $(addprefix $(current_dir),pandoc_header_numbering.py) \
+				   --highlight-style=monochrome \
 				   $(before) \
 				   $< -o $@
 
