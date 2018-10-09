@@ -50,8 +50,13 @@
 - The points indicated for each question are only informative and are
   potentially subject to modification.
 - Unless specified otherwise, all your answers should be thoroughly justified.
-- Do not give more answers than what is indicated. In case of multiple answers,
-  we reserve the right to grade only the *worst* one.
+- Do not give more answers than what is indicated.
+    - In case of multiple answers, we reserve the right to grade only the
+      *worst* one.
+- We reserve the right to grant more partial credit to blank answers than to
+  fully incorrect answers for certain questions.
+    - In such questions, a blank answer should get 10% of the question's point
+      value (rounded up to the next 0.5).
 
 \newpage
 
