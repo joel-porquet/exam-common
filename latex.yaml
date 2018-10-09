@@ -12,4 +12,5 @@ include-before:
 # For latex environment filter
 pandoc-latex-environment:
     answer: [answer]
+    center: [center]
 ---
