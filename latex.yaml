@@ -4,7 +4,7 @@ papersize: letter
 fontsize: 12pt
 documentclass: article
 classoption: twoside
-geometry: margin=1in
+geometry: top=0.2in,bottom=0.2in,left=0.5in,right=0.5in,includeheadfoot,headsep=10pt
 subparagraph: yes
 include-before:
     - \thispagestyle{empty}
