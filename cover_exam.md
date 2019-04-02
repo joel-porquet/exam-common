@@ -11,19 +11,16 @@
   examination that I will receive a score of zero.
 - Eyes are to be kept on the test at all time during examinations.
 
-
 ::: {.columns}
 ::: {.column}
 
 &nbsp;
+\vspace{2em}
 
 **Name (print):** \hrulefill
 
 &nbsp;
-
-**Signature:** \hrulefill
-
-&nbsp;
+\vspace{2em}
 
 **SID left:** \hrulefill
 
@@ -31,23 +28,23 @@
 ::: {.column}
 
 &nbsp;
+\vspace{2em}
 
 **Student ID:** \hrulefill
 
 &nbsp;
-
-**Date:** \hrulefill
-
-&nbsp;
+\vspace{2em}
 
 **SID right:** \hrulefill
 
 :::
 :::
 
+\vspace{2em}
+
 **Important information:**
 
-- The points indicated for each question are only informative and are
+- The points indicated for each question are only *informative* and are
   potentially subject to modification.
 - Unless specified otherwise, all your answers should be thoroughly justified.
 - Do not give more answers than what is indicated.
