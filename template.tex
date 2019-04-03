@@ -16,10 +16,10 @@ $endif$
 \cfoot{}
 
 %
-% Solution environment
+% Key environment
 %
-$if(solution)$
-\makeatletter\newenvironment{answer}[1]{%
+$if(key)$
+\makeatletter\newenvironment{key}[1]{%
     \begin{lrbox}{\@tempboxa}\begin{minipage}{\linewidth}%
 }{%
     \end{minipage}\end{lrbox}%
@@ -28,7 +28,7 @@ $if(solution)$
     \medskip%
 }\makeatother
 $else$
-\makeatletter\newenvironment{answer}[1]{%
+\makeatletter\newenvironment{key}[1]{%
     \ifnum#1>0
     \fbox{\begin{minipage}{\linewidth}\hfill\vspace*{#1\baselineskip}\end{minipage}}%
     \fi

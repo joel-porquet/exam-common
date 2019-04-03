@@ -11,7 +11,7 @@ $(error Could not find executable '$(PANDOC)' in PATH)
 endif
 
 pdf := $(src:%.md=%.pdf)
-pdf_sol := $(src:%.md=%_sol.pdf)
+pdf_key := $(src:%.md=%_key.pdf)
 
 ## Extra dependencies for all targets
 tmpl := $(addprefix $(current_dir),template.tex)
@@ -39,19 +39,19 @@ exam := False
 endif
 
 ## Our main rule building all our targets
-all: $(pdf) $(pdf_sol)
+all: $(pdf) $(pdf_key)
 
 ## Template processing rule
 quiet_cmd_tpl = TMPL $(@)
       cmd_tpl = pandoc \
-				-M solution=$(2) \
+				-M key=$(2) \
 				-M exam=$(exam) \
 				--template=$(tmpl) \
 				$< -o $@
 
 %.tpl: %.md $(tmpl)
 	$(call cmd,tpl,False)
-%_sol.tpl: %.md $(tmpl)
+%_key.tpl: %.md $(tmpl)
 	$(call cmd,tpl,True)
 
 ## Markdown to PDF rule
@@ -66,12 +66,12 @@ quiet_cmd_pandoc = PANDOC $(@)
 
 %.pdf: %.md %.tpl $(before)
 	$(call cmd,pandoc,$*)
-%_sol.pdf: %.md %_sol.tpl $(before)
-	$(call cmd,pandoc,$*_sol)
+%_key.pdf: %.md %_key.tpl $(before)
+	$(call cmd,pandoc,$*_key)
 
 ## Clean
 clean:
-	$(Q)rm -f $(pdf) $(pdf_sol)
+	$(Q)rm -f $(pdf) $(pdf_key)
 
 distclean:
 	$(Q)rm -f *.tpl
