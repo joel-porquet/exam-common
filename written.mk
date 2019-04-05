@@ -47,6 +47,7 @@ quiet_cmd_tpl = TMPL $(@)
 				-M key=$(2) \
 				-M exam=$(exam) \
 				--template=$(tmpl) \
+				--mathjax \
 				$< -o $@
 
 %.tpl: %.md $(tmpl)
