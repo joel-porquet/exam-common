@@ -11,6 +11,7 @@ include-before:
 
 # For latex environment filter
 pandoc-latex-environment:
+    columns: [columns]
     key: [key]
     center: [center]
 ---
