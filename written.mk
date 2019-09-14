@@ -59,7 +59,7 @@ quiet_cmd_tpl = TMPL $(@)
 quiet_cmd_pandoc = PANDOC $(@)
       cmd_pandoc = pandoc -s \
 				   -H $(2).tpl \
-				   --resource-path=.:$(current_dir) \
+				   --resource-path=.:$(GIT_DIR):$(current_dir) \
 				   --filter $(addprefix $(current_dir),pandoc_latex_environment.py) \
 				   --filter $(addprefix $(current_dir),pandoc_header_numbering.py) \
 				   --highlight-style=monochrome \
