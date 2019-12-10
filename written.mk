@@ -10,7 +10,7 @@ ifeq (,$(shell command -v $(PANDOC) 2>/dev/null))
 $(error Could not find executable '$(PANDOC)' in PATH)
 endif
 
-pdf := $(src:%.md=%.pdf)
+pdf_exam := $(src:%.md=%_exam.pdf)
 pdf_key := $(src:%.md=%_key.pdf)
 
 ## Extra dependencies for all targets
@@ -39,26 +39,26 @@ exam := False
 endif
 
 ## Our main rule building all our targets
-all: $(pdf) $(pdf_key)
+all: $(pdf_exam) $(pdf_key)
 
 ## Template processing rule
-quiet_cmd_tpl = TMPL $(@)
-      cmd_tpl = pandoc \
+quiet_cmd_tmpl = TMPL $(@)
+      cmd_tmpl = pandoc \
 				-M key=$(2) \
 				-M exam=$(exam) \
 				--template=$(tmpl) \
 				--mathjax \
 				$< -o $@
 
-%.tpl: %.md $(tmpl)
-	$(call cmd,tpl,False)
-%_key.tpl: %.md $(tmpl)
-	$(call cmd,tpl,True)
+%_exam.tmpl: %.md $(tmpl)
+	$(call cmd,tmpl,False)
+%_key.tmpl: %.md $(tmpl)
+	$(call cmd,tmpl,True)
 
 ## Markdown to PDF rule
 quiet_cmd_pandoc = PANDOC $(@)
       cmd_pandoc = pandoc -s \
-				   -H $(2).tpl \
+				   -H $(2).tmpl \
 				   --resource-path=.:$(GIT_DIR):$(current_dir) \
 				   --filter $(addprefix $(current_dir),pandoc_latex_environment.py) \
 				   --filter $(addprefix $(current_dir),pandoc_header_numbering.py) \
@@ -66,14 +66,14 @@ quiet_cmd_pandoc = PANDOC $(@)
 				   $(before) \
 				   $< -o $@
 
-%.pdf: %.md %.tpl $(before)
-	$(call cmd,pandoc,$*)
-%_key.pdf: %.md %_key.tpl $(before)
+%_exam.pdf: %.md %_exam.tmpl $(before)
+	$(call cmd,pandoc,$*_exam)
+%_key.pdf: %.md %_key.tmpl $(before)
 	$(call cmd,pandoc,$*_key)
 
 ## Clean
 clean:
-	$(Q)rm -f $(pdf) $(pdf_key)
+	$(Q)rm -f $(pdf_exam) $(pdf_key)
 
 distclean:
-	$(Q)rm -f *.tpl
+	$(Q)rm -f *.tmpl
